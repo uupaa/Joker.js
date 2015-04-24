@@ -2,7 +2,7 @@
 
 [![npm](https://nodei.co/npm/uupaa.joker.js.png?downloads=true&stars=true)](https://nodei.co/npm/uupaa.joker.js/)
 
-# Joker.js
+Anti-cheat functions.
 
 ## Document
 
@@ -18,7 +18,12 @@
 ```js
 <script src="lib/Joker.js"></script>
 <script>
-console.log( Joker() );
+var spec = new Spec();
+var joker = new Joker(spec);
+
+console.log( joker.CANVAS_FINGERPRINT );
+console.log( joker.GPU_FINGERPRINT );
+
 </script>
 ```
 
@@ -27,7 +32,6 @@ console.log( Joker() );
 ```js
 importScripts("lib/Joker.js");
 
-console.log( Joker() );
 ```
 
 ### Node.js
@@ -35,6 +39,5 @@ console.log( Joker() );
 ```js
 require("lib/Joker.js");
 
-console.log( Joker() );
 ```
 
