@@ -1,18 +1,19 @@
 {
   "name": "uupaa.joker.js",
-  "version": "0.0.1",
-  "description": "Anti-cheat functions",
+  "version": "0.0.2",
+  "description": "",
   "url": "https://github.com/uupaa/Joker.js",
-  "keywords": ["uupaa", "WebModule", "Unstable"],
+  "keywords": ["uupaa", "WebModule"],
   "repository": {
     "type": "git",
     "url": "https://github.com/uupaa/Joker.js.git"
   },
   "scripts": {
     "sync": "node ../WebModule/run/sync.js; npm update; node ../WebModule/run/page.js",
+    "wiki": "node ../WebModule/run/wiki.js",
     "min": "node ../WebModule/run/minify.js --verbose --strict --keep --pretty",
     "build": "node ../WebModule/run/minify.js --verbose --strict --keep --release",
-    "watch": "node ../WebModule/run/watch.js --verbose --run hint",
+    "watch": "node ../WebModule/run/watch.js --verbose --run lint",
     "page": "node ../WebModule/run/page.js --verbose",
     "test": "npm run min; npm run node; npm run browser",
     "node": "NODE_ENV=production NODE_PATH=lib node --harmony test/node.js",
@@ -20,7 +21,7 @@
     "browser": "open http://localhost:8000/Joker.js/test/index.html",
     "sim": "node ../WebModule/run/sim.js http://localhost:8000/Joker.js/test/index.html",
     "simx": "node ../WebModule/run/sim.js stop",
-    "hint": "jshint lib/*.js",
+    "lint": "eslint lib/*.js",
     "score": "node ../WebModule/run/score.js; open lint/plato/index.html",
     "patch": "node ../WebModule/run/patch.js",
     "setup": "node ../WebModule/run/setup.js",
@@ -33,25 +34,12 @@
     "browser": {
       "source": ["lib/Joker.js"],
       "output": "release/Joker.b.min.js"
-    },
-    "worker": {
-      "source": ["lib/Joker.js"],
-      "output": "release/Joker.w.min.js"
-    },
-    "node": {
-      "source": ["lib/Joker.js"],
-      "output": "release/Joker.n.min.js"
-    },
-    "nw": {
-      "source": ["lib/Joker.js"],
-      "output": "release/Joker.nw.min.js"
     }
   },
-  "dependencies": {
-    "uupaa.hash.js": "",
+  "dependencies": {},
+  "devDependencies": {
     "uupaa.spec.js": ""
   },
-  "devDependencies": {},
   "lib": "./lib/",
   "main": "./index.js",
   "author": "uupaa",

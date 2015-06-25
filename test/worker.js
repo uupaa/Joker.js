@@ -1,24 +1,28 @@
 // Joker test
 
 onmessage = function(event) {
-    self.TEST_DATA = event.data;
-    self.TEST_ERROR_MESSAGE = "";
+    self.unitTest = event.data; // { message, setting: { secondary, baseDir } }
 
-    if (!self.console) {
+    if (!self.console) { // polyfill WebWorkerConsole
         self.console = function() {};
+        self.console.dir = function() {};
         self.console.log = function() {};
         self.console.warn = function() {};
         self.console.error = function() {};
+        self.console.table = function() {};
     }
 
-    importScripts("../node_modules/uupaa.hash.js/lib/Hash.js");
-    importScripts("../node_modules/uupaa.spec.js/lib/SpecCatalog.js");
-    importScripts("../node_modules/uupaa.spec.js/lib/Spec.js");
-    importScripts(".././test/wmtools.js");
-    importScripts("../lib/Joker.js");
-    importScripts("../release/Joker.w.min.js");
-    importScripts("./testcase.js");
+    importScripts("../lib/WebModule.js");
 
-    self.postMessage({ TEST_ERROR_MESSAGE: self.TEST_ERROR_MESSAGE || "" });
+    //publish to global. eg: window.WebModule.Class -> window.Class
+    //WebModule.publish = true;
+
+    
+    
+    
+    
+    
+
+    self.postMessage(self.unitTest);
 };
 

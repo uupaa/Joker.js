@@ -1,43 +1,21 @@
-# Joker.js [![Build Status](https://travis-ci.org/uupaa/Joker.js.png)](http://travis-ci.org/uupaa/Joker.js)
+# Joker.js [![Build Status](https://travis-ci.org/uupaa/Joker.js.svg)](https://travis-ci.org/uupaa/Joker.js)
 
-[![npm](https://nodei.co/npm/uupaa.joker.js.png?downloads=true&stars=true)](https://nodei.co/npm/uupaa.joker.js/)
+[![npm](https://nodei.co/npm/uupaa.joker.js.svg?downloads=true&stars=true)](https://nodei.co/npm/uupaa.joker.js/)
 
-Anti-cheat functions.
 
-## Document
 
-- [Joker.js wiki](https://github.com/uupaa/Joker.js/wiki/Joker)
-- [WebModule](https://github.com/uupaa/WebModule)
-    - [Slide](http://uupaa.github.io/Slide/slide/WebModule/index.html)
-    - [Development](https://github.com/uupaa/WebModule/wiki/Development)
+- Joker.js made of [WebModule](https://github.com/uupaa/WebModule).
+- [Spec](https://github.com/uupaa/Joker.js/wiki/Joker)
 
-## Run on
-
-### Browser and node-webkit
+## Browser and NW.js(node-webkit)
 
 ```js
-<script src="lib/Joker.js"></script>
+<script src="<module-dir>/lib/WebModule.js"></script>
+<script src="<module-dir>/lib/Joker.js"></script>
+<script src="<module-dir>/node_modules/spec.js"></script>
 <script>
-var spec = new Spec();
-var joker = new Joker(spec);
-
-console.log( joker.CANVAS_FINGERPRINT );
-console.log( joker.GPU_FINGERPRINT );
-
+    ...
 </script>
 ```
 
-### WebWorkers
-
-```js
-importScripts("lib/Joker.js");
-
-```
-
-### Node.js
-
-```js
-require("lib/Joker.js");
-
-```
 
