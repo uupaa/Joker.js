@@ -1,10 +1,6 @@
 var ModuleTestJoker = (function(global) {
 
-var _isNodeOrNodeWebKit = !!global.global;
-var _runOnNodeWebKit =  _isNodeOrNodeWebKit &&  /native/.test(setTimeout);
-var _runOnNode       =  _isNodeOrNodeWebKit && !/native/.test(setTimeout);
-var _runOnWorker     = !_isNodeOrNodeWebKit && "WorkerLocation" in global;
-var _runOnBrowser    = !_isNodeOrNodeWebKit && "document" in global;
+global["BENCHMARK"] = false;
 
 var test = new Test("Joker", {
         disable:    false, // disable all tests.
@@ -15,46 +11,48 @@ var test = new Test("Joker", {
         button:     true,  // show button.
         both:       true,  // test the primary and secondary modules.
         ignoreError:false, // ignore error.
+        callback:   function() {
+        },
+        errorback:  function(error) {
+        }
     }).add([
+        // generic test
+        testJoker_value,
     ]);
 
-var spec = new Spec();
-var joker = new Joker(spec);
-
-if (_runOnBrowser || _runOnNodeWebKit) {
-    test.add([ testJoker_CanvasFingerprint ]);
-} else if (_runOnWorker) {
-    //test.add([]);
-} else if (_runOnNode) {
-    //test.add([]);
+if (IN_BROWSER || IN_NW) {
+    test.add([
+        // browser and node-webkit test
+    ]);
+} else if (IN_WORKER) {
+    test.add([
+        // worker test
+    ]);
+} else if (IN_NODE) {
+    test.add([
+        // node.js and io.js test
+    ]);
 }
 
 // --- test cases ------------------------------------------
-function testJoker_CanvasFingerprint(test, pass, miss) {
+function testJoker_value(test, pass, miss) {
+    var spec = new WebModule.Spec();
+    var joker = new WebModule.Joker(spec);
 
-    console.log( JSON.stringify(joker, null, 2) );
+    console.log( joker.CANVAS_FINGERPRINT );
+    console.log( joker.GPU_FINGERPRINT );
 
-    var result = {
-            DEVICE:             spec.DEVICE,
-            MAX_TEXTURE_SIZE:   spec.MAX_TEXTURE_SIZE,
-            USER_AGENT:         spec.USER_AGENT,
-            GPU_VERSION:        spec.GPU_VERSION,
-            WEBGL_CONTEXT:      spec.WEBGL_CONTEXT,
-            DISPLAY_DPR:        spec.DISPLAY_DPR,
-            DISPLAY_LONG:       spec.DISPLAY_LONG,
-            DISPLAY_SHORT:      spec.DISPLAY_SHORT,
-            MAX_TOUCH_POINTS:   spec.MAX_TOUCH_POINTS,
-            CPU_CORES:          spec.CPU_CORES,
-            GPU_FINGERPRINT:    joker.GPU_FINGERPRINT.toString(16),
-            CANVAS_FINGERPRINT: joker.CANVAS_FINGERPRINT.toString(16),
-        };
-
-    console.log( JSON.stringify(result, null, 2) );
-
-    test.done(pass());
+/*
+    webModule.startThread("../lib/WebModuleWorker.js", function() {
+        ;
+    }, function(error) {
+        throw error;
+    });
+ */
 }
 
-return test.run().clone();
 
-})((this || 0).self || global);
+return test.run();
+
+})(GLOBAL);
 
